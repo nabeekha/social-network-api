@@ -1,4 +1,15 @@
 {
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "API  for a social network created using Express.js and Mongo.db",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "mongoose": "^7.2.1"
