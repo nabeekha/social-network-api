@@ -2,29 +2,26 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    username: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true,
-    },
-    email: {
+    thoughtText: {
         type: String,
-      unique: true,
-      required: true,
-      match: [/.+@.+\..+/, 'Must match an email address!'],
+        required: true,
+        //not sure if this is the proper length
+        validate: thoughtText.length >= 1 && thoughtText.length <= 280,
     },
-    thoughts: [{
+    createdAt: {
+        type: Date, 
+        //need to add additional criteria here 
+    },
+    username: {
+        type: String,
+        required: true,
+    },
+    reactions: [{
         type: Schema.Types.ObjectId,
-        ref: 'Thought',
-    },
-    ],
-    friends: [{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
-    ],
-  },
+        // not sure if this is the correct reference 
+        ref: 'reactionSchema',
+    }],
+    }, 
   {
     toJSON: {
       virtuals: true,
