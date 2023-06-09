@@ -44,6 +44,16 @@ async updateOneUser (req, res) {
         )
         .catch((err) => res.status(500).json(err));
 },
+async deleteOneUser (req, res) {
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "There is no user with this ID" })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
+      .then(() => res.json({ message: "Deleted the user and thought" }))
+      .catch((err) => res.status(500).json(err));
+},
 //function to add a friend
 async addOneFriend (req, res) {
     User.findOneAndUpdate(
