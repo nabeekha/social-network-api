@@ -1,7 +1,8 @@
 const router = require('express').Router()
-const { createUser } = require('../../controllers/user-controller')
+const { getAllUsers, getOneUser, addOneFriend, deleteOneFriend, updateOneUser, createUser } = require('../../controllers/user-controller')
 
-// add post route to this 
-router.route('/').post(createUser)
+
+// add get route to this 
+router.route('/').get(getAllUsers).post(createUser)
 
 module.exports = router

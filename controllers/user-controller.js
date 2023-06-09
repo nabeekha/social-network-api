@@ -31,6 +31,19 @@ async createUser (req, res) {
         res.status(500).json(error)
     }
 },
+async updateOneUser (req, res) {
+    User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      )
+        .then((user) =>
+          !user
+            ? res.status(404).json({ message: "There is no user with this ID" })
+            : res.json(user)
+        )
+        .catch((err) => res.status(500).json(err));
+},
 //function to add a friend
 async addOneFriend (req, res) {
     User.findOneAndUpdate(
