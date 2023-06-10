@@ -2,6 +2,38 @@ const { Schema, model, Types } = require('mongoose');
 //utilizing moment for time stamp formatting 
 const moment = require('moment')
 
+//reaction schema
+const reactionSchema = new Schema (
+  {
+     reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+     },
+     reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280
+     },
+     username: {
+      type: String,
+      required: true,
+     },
+     createdAt: {
+      type: Date,
+      default: Date.now,
+      get: createdAtVal => moment(createdAtVal).format("hh:mm [at] MMM DD, YYYY"),
+     },
+  },
+  {
+    toJSON: {
+        virtuals: true,
+        getters: true
+    },
+    id: false,
+}
+)
+
+//schema for thoughts
 const thoughtSchema = new Schema(
   {
     thoughtText: {
