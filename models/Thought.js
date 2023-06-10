@@ -9,7 +9,7 @@ const reactionSchema = new Schema (
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
      },
-     reactionBody: {
+     reactionText: {
       type: String,
       required: true,
       maxlength: 280
@@ -18,7 +18,7 @@ const reactionSchema = new Schema (
       type: String,
       required: true,
      },
-     createdAt: {
+     createTime: {
       type: Date,
       default: Date.now,
       get: createdAtVal => moment(createdAtVal).format("hh:mm [at] MMM DD, YYYY"),
@@ -42,7 +42,7 @@ const thoughtSchema = new Schema(
         minlength: 1,
         maxlength: 280,
     },
-    createdAt: {
+    createTime: {
         type: Date, 
         default: Date.now,
         get: createdAtVal => moment(createdAtVal).format("hh:mm [at] MMM DD, YYYY"),
