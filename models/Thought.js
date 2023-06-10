@@ -1,39 +1,38 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
+//utilizing moment for time stamp formatting 
+const moment = require('moment')
 
-const userSchema = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
         type: String,
         required: true,
-        //not sure if this is the proper length
-        validate: thoughtText.length >= 1 && thoughtText.length <= 280,
+        minlength: 1,
+        maxlength: 280,
     },
     createdAt: {
         type: Date, 
-        //need to add additional criteria here 
+        default: Date.now,
+        get: createdAtVal => moment(createdAtVal).format("hh:mm [at] MMM DD, YYYY"),
     },
     username: {
         type: String,
         required: true,
     },
-    reactions: [{
-        type: Schema.Types.ObjectId,
-        // not sure if this is the correct reference 
-        ref: 'reactionSchema',
-    }],
+    reactions: [reactionSchema],
     }, 
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
 );
 
-userSchema.virtual('friendCount').get(function(){
-    return this.friends.length
+thoughtSchema.virtual('reactionCount').get(function(){
+    return this.reactions.length
 })
 
-const User = model('User', userSchema)
-
-module.exports = User;
+const User = model('Thought', thoughtSchema)
+module.exports = Thought;
