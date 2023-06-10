@@ -53,8 +53,8 @@ async deleteOneThought (req, res) {
       .then(() => res.json({ message: "Deleted the thought and thought" }))
       .catch((err) => res.status(500).json(err));
 },
-//function to add a friend
-async addOneFriend (req, res) {
+//function to add a reaction
+async addOneReaction (req, res) {
     thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $addToSet: { friends: req.params.friendId } },
@@ -67,7 +67,7 @@ async addOneFriend (req, res) {
         )
         .catch((err) => res.status(500).json(err));
 },
-//function to delete a friend
+//function to delete a reaction
 async deleteOneReaction (req, res) {
     thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
