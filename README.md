@@ -35,7 +35,7 @@ After you have installed the necessary packages, please invoke the appliation by
 
 Please see images of the routes as displayed in Insomnia below.
 
-![alt text](assets/images/screenshot.png)
+![Insomnia-Routes](./assets/Soclal-Network-API-Insomnia.png)
 
 ## Credits
 
